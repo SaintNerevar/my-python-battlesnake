@@ -58,7 +58,7 @@ class Battlesnake(object):
         for index, direction in enumerate(directions):
             if (direction[0] < 0 or direction[0] >= board_width):
                 continue
-            if (direction[1] < 0 or direction[1 >= board_height]):
+            if (direction[1] < 0 or direction[1] >= board_height):
                 continue
             eligible_moves.append(index)
 
