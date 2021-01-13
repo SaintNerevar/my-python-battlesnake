@@ -50,6 +50,9 @@ class Battlesnake(object):
 
         board_height = data["board"]["height"]
         board_width = data["board"]["width"]
+
+        body = [(part["x"], part["y"]) for part in data["you"]["body"]]
+        
         eligible_moves = []
         directions = [up, down, left, right]
 
@@ -61,6 +64,11 @@ class Battlesnake(object):
             if (y < 0 or y >= board_height):
                 continue
             eligible_moves.append(index)
+
+        # Check for self collision
+        for index in list(eligible_moves):
+            if directions[index] in body:
+                eligible_moves.remove(index)
 
         # Choose a random direction to move in among eligible choices
         possible_moves = ["up", "down", "left", "right"]
