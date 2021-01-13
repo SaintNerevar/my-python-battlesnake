@@ -42,23 +42,23 @@ class Battlesnake(object):
         # Valid moves are "up", "down", "left", or "right".
         data = cherrypy.request.json
 
-        head = (data['you']['head']['x'], head['you']['head']['y'])
+        head = (data["you"]["head"]["x"], data["you"]["head"]["y"])
         up = (head[0], head[1]+1)
         down = (head[0], head[1]-1)
         left = (head[0]-1, head[1])
-        right = (head[0]-1, head[1])
+        right = (head[0]+1, head[1])
 
-        board_height = data['board']['height']
-        board_width = data['board']['width']
+        board_height = data["board"]["height"]
+        board_width = data["board"]["width"]
         eligible_moves = []
         directions = [up, down, left, right]
 
 
         # Check for wall collision
-        for index, direction in enumerate(directions):
-            if (direction[0] < 0 or direction[0] >= board_width):
+        for index, (x, y) in enumerate(directions):
+            if (x < 0 or x >= board_width):
                 continue
-            if (direction[1] < 0 or direction[1] >= board_height):
+            if (y < 0 or y >= board_height):
                 continue
             eligible_moves.append(index)
 
